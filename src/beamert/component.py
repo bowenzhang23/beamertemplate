@@ -48,6 +48,9 @@ class BeamerStyle(BeamerComponent):
 
 \setbeamertemplate{title page}[default][rounded=true,shadow=false]
 \setbeamertemplate{blocks}[rounded][shadow=false]
+
+\setlength{\leftmargini}{0.3cm}
+\setlength{\leftmarginii}{0.3cm}
 """
         return style_tex
 
@@ -58,34 +61,53 @@ class BeamerTitleSetting(BeamerComponent):
         self._btc = btc
 
     def parse(self):
+        tex_collection = list()
         btc = self._btc
-        t_tex = f"\\title[{btc.title_short}]{curlybraket(btc.title)}"
-        tsub_tex = f"\\subtitle{curlybraket(btc.title_sub)}"
-        nms_extra = ", ".join([nm for nm in btc.names_short])
-        nm_extra = " \\and ".join(
-            [
-                f"{nm}\\inst{curlybraket(btc.names_inst_i[i])}"
-                for i, nm in enumerate(btc.names)
-            ]
-        )
-        au_tex = f"\\author[{nms_extra}]{curlybraket(nm_extra)}"
-        insts_extra = ",".join([inst for inst in btc.insts_short])
-        inst_extra = "\n".join(
-            [
-                f"\\inst{curlybraket(btc.insts_i[i])}\n{inst}"
-                for i, inst in enumerate(btc.insts)
-            ]
-        )
-        inst_tex = f"\\institute[{insts_extra}]" + curlybraket(inst_extra)
-        meeting_tex = f"\\date[{btc.meeting_short}]{curlybraket(btc.meeting)}"
-        logo_extra = "\n".join(
-            [
-                f"\\includegraphics[height=1cm]{curlybraket(abspath(p))}"
-                for p in btc.logo_paths
-            ]
-        )
-        logo_tex = f"\\logo{curlybraket(logo_extra)}"
-        return "\n".join([t_tex, tsub_tex, au_tex, inst_tex, meeting_tex, logo_tex])
+        if btc.title:
+            t_tex = f"\\title[{btc.title_short}]{curlybraket(btc.title)}"
+            tex_collection.append(t_tex)
+        if btc.title_sub:
+            tsub_tex = f"\\subtitle{curlybraket(btc.title_sub)}"
+            tex_collection.append(tsub_tex)
+        if btc.names_short:
+            nms_extra = ", ".join([nm for nm in btc.names_short])
+        if btc.names and btc.names_inst_i:
+            nm_extra = " \\and ".join(
+                [
+                    f"{nm}\\inst{curlybraket(btc.names_inst_i[i])}"
+                    for i, nm in enumerate(btc.names)
+                ]
+            )
+        elif btc.names:
+            nm_extra = " \\and ".join([f"{nm}" for _, nm in enumerate(btc.names)])
+        if btc.names_short:
+            au_tex = f"\\author[{nms_extra}]{curlybraket(nm_extra)}"
+            tex_collection.append(au_tex)
+        if btc.insts_short:
+            insts_extra = ",".join([inst for inst in btc.insts_short])
+        if btc.insts and btc.insts_i:
+            inst_extra = "\n".join(
+                [
+                    f"\\inst{curlybraket(btc.insts_i[i])}\n{inst}"
+                    for i, inst in enumerate(btc.insts)
+                ]
+            )
+        if btc.insts_short:
+            inst_tex = f"\\institute[{insts_extra}]" + curlybraket(inst_extra)
+            tex_collection.append(inst_tex)
+        if btc.meeting_short and btc.meeting:
+            meeting_tex = f"\\date[{btc.meeting_short}]{curlybraket(btc.meeting)}"
+            tex_collection.append(meeting_tex)
+        if btc.logo_paths:
+            logo_extra = "\n".join(
+                [
+                    f"\\includegraphics[height=1cm]{curlybraket(abspath(p))}"
+                    for p in btc.logo_paths
+                ]
+            )
+            logo_tex = f"\\logo{curlybraket(logo_extra)}"
+            tex_collection.append(logo_tex)
+        return "\n".join(tex_collection)
 
 
 class BeamerTocSetting(BeamerComponent):
