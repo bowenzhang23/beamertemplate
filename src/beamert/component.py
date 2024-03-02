@@ -19,7 +19,7 @@ class BeamerHeader(BeamerComponent):
 
     def parse(self):
         header_tex = r"""
-\documentclass{beamer}
+\documentclass[aspectratio=1610]{beamer}
 \usepackage[utf8]{inputenc}
 """
         return header_tex
@@ -35,7 +35,10 @@ class BeamerStyle(BeamerComponent):
 \useoutertheme{default}
 \useinnertheme{rounded}
 
-\definecolor{myblue}{rgb}{0.04706, 0.13725, 0.26667}
+\definecolor{myblue}{rgb}{0.35686, 0.60784, 0.83529}
+\definecolor{mylightblue}{rgb}{0.0, 0.43922, 0.75294}
+\definecolor{mydarkblue}{rgb}{0.26667, 0.45490, 0.62745}
+\definecolor{myorange}{rgb}{0.92941, 0.49020, 0.19216}
 \definecolor{mygrey}{rgb}{0.3686, 0.5255, 0.6235}
 
 \setbeamercolor{palette primary}{bg=myblue,fg=white}
@@ -45,6 +48,10 @@ class BeamerStyle(BeamerComponent):
 \setbeamercolor{structure}{fg=myblue} % itemize, enumerate, etc
 \setbeamercolor{section in toc}{fg=myblue} % TOC sections
 \setbeamercolor{subsection in head/foot}{bg=mygrey,fg=white}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}[square]
+\setbeamertemplate{enumerate items}[square]
+
 
 \setbeamertemplate{title page}[default][rounded=true,shadow=false]
 \setbeamertemplate{blocks}[rounded][shadow=false]
