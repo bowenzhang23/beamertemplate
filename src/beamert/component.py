@@ -52,7 +52,6 @@ class BeamerStyle(BeamerComponent):
 \setbeamertemplate{itemize items}[square]
 \setbeamertemplate{enumerate items}[square]
 
-
 \setbeamertemplate{title page}[default][rounded=true,shadow=false]
 \setbeamertemplate{blocks}[rounded][shadow=false]
 
