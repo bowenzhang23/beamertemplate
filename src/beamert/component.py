@@ -102,6 +102,9 @@ class BeamerTitleSetting(BeamerComponent):
         if btc.insts_short:
             inst_tex = f"\\institute[{insts_extra}]" + curlybraket(inst_extra)
             tex_collection.append(inst_tex)
+        if btc.meeting:
+            meeting_tex = f"\\date{curlybraket(btc.meeting)}"
+            tex_collection.append(meeting_tex)
         if btc.meeting_short and btc.meeting:
             meeting_tex = f"\\date[{btc.meeting_short}]{curlybraket(btc.meeting)}"
             tex_collection.append(meeting_tex)
