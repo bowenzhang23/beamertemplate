@@ -22,7 +22,7 @@ components = [
     BeamerTitleSetting(btc=btc),
     BeamerTocSetting(),
     # Begin document
-    BeamerDocumentCtrl(begin=True),
+    BeamerDocumentCtrl(Ctrl.Begin),
     # Frames
     BeamerTitleFrame(),
     BeamerTocFrame("Outline"),
@@ -34,5 +34,5 @@ components = [
     BeamerEmptyFrame(),
     BeamerFileFrame("test/frames/frame_twocolumn.tex"),
     # End document
-    BeamerDocumentCtrl(begin=False),
+    BeamerDocumentCtrl(Ctrl.End),
 ]

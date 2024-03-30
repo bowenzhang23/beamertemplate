@@ -1,5 +1,9 @@
 from typing import Iterable
 
+class Ctrl:
+    Begin = 0
+    End = 1
+
 def curlybraket(s):
     return "".join(["{", str(s), "}"])
 

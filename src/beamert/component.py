@@ -137,12 +137,12 @@ class BeamerTocSetting(BeamerComponent):
 
 
 class BeamerDocumentCtrl(BeamerComponent):
-    def __init__(self, begin):
+    def __init__(self, ctrl: Ctrl):
         super().__init__()
-        self._begin = begin
+        self._ctrl = ctrl
 
     def parse(self):
-        if self._begin:
+        if self._ctrl == Ctrl.Begin:
             return begin("document")
         else:
             return end("document")
