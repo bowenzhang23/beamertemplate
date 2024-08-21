@@ -21,6 +21,10 @@ class BeamerHeader(BeamerComponent):
         header_tex = r"""
 \documentclass[aspectratio=1610]{beamer}
 \usepackage[utf8]{inputenc}
+\usepackage{xspace}
+\usepackage{blindtext}
+\usepackage{hyperref}
+\usepackage{booktabs}
 """
         return header_tex
 
