@@ -38,7 +38,7 @@ class BeamerCompiler(object):
                     shell=True,
                     stdout=subprocess.PIPE,
                 )
-                self._logger.debug(popen.stdout.read())
+                self._logger.debug(popen.stdout.read().decode())
                 popen.wait()
                 rcode = popen.returncode
                 self._logger.info(f"CMD {self._cmd} returning {rcode}")
