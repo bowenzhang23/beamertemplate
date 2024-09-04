@@ -25,6 +25,7 @@ class BeamerHeader(BeamerComponent):
 \usepackage{blindtext}
 \usepackage{hyperref}
 \usepackage{booktabs}
+\usepackage{graphicx}
 """
         return header_tex
 
