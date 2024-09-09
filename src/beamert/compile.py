@@ -13,6 +13,15 @@ class BeamerCompiler(object):
         )
         self._logger.setLevel(logging.DEBUG if verbose else logging.INFO)
         self._logger.info("Initiating compiler ..")
+        self._width = 60
+    
+    def _hint(self, msg):
+        """TODO add more hints for errors"""
+        if "! Missing $ inserted." in msg:
+            self._logger.info("Found error \"Missing $ inserted\"")
+            self._logger.info("Possible mistakes: 1) math expression 2) charactor '_' not backslashed 3) ..")
+        else:
+            self._logger.info("None")
 
     def compile(self, output_path):
         def _compile(output_path):
@@ -37,8 +46,16 @@ class BeamerCompiler(object):
                     f"{self._cmd} -interaction=nonstopmode {out_dir} {output_path}",
                     shell=True,
                     stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
                 )
-                self._logger.debug(popen.stdout.read().decode())
+                stdout = popen.stdout.read().decode()
+                stderr = popen.stderr.read().decode()
+                self._logger.debug(f" {self._cmd} stdout ".center(self._width, "-"))
+                self._logger.debug(stdout)
+                self._logger.debug(f" {self._cmd} stderr ".center(self._width, "-"))
+                self._logger.debug(stderr)
+                self._logger.info(f" Hints ".center(self._width, "-"))
+                self._hint(stdout)
                 popen.wait()
                 rcode = popen.returncode
                 self._logger.info(f"CMD {self._cmd} returning {rcode}")
