@@ -17,6 +17,7 @@ class BeamerCompiler(object):
     
     def _hint(self, msg):
         """TODO add more hints for errors"""
+        self._logger.info(f" Hints ".center(self._width, "-"))
         if "! Missing $ inserted." in msg:
             self._logger.info("Found error \"Missing $ inserted\"")
             self._logger.info("Possible mistakes: 1) math expression 2) charactor '_' not backslashed 3) ..")
@@ -54,8 +55,6 @@ class BeamerCompiler(object):
                 self._logger.debug(stdout)
                 self._logger.debug(f" {self._cmd} stderr ".center(self._width, "-"))
                 self._logger.debug(stderr)
-                self._logger.info(f" Hints ".center(self._width, "-"))
-                self._hint(stdout)
                 popen.wait()
                 rcode = popen.returncode
                 self._logger.info(f"CMD {self._cmd} returning {rcode}")
@@ -63,6 +62,7 @@ class BeamerCompiler(object):
                     pdf_path = output_path.replace(".tex", ".pdf")
                     self._logger.info(f"[Success] Pdf in {pdf_path}")
                 else:
+                    self._hint(stdout)
                     self._logger.error(f"[Failed] {self._cmd} failed to compile..")
             except Exception as e:
                 self._logger.error(f"[Failed] {e}")
