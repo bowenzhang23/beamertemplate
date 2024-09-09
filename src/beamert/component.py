@@ -22,6 +22,7 @@ class BeamerHeader(BeamerComponent):
 \documentclass[aspectratio=1610]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage{xspace}
+\usepackage{xcolor}
 \usepackage{blindtext}
 \usepackage{hyperref}
 \usepackage{booktabs}
