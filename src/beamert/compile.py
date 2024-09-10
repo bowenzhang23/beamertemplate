@@ -15,12 +15,25 @@ class BeamerCompiler(object):
         self._logger.info("Initiating compiler ..")
         self._width = 60
     
+    def _hint_missing_dollar(self):
+        self._logger.info("Found error \"Missing $ inserted\"")
+        self._logger.info("Possible mistakes: 1) math expression 2) charactor '_' not backslashed 3) ..")
+
+    def _hint_undefined_control_sequence(self, lines):
+        for i, line in enumerate(lines):
+            if "! Undefined control sequence" in line:
+                break
+        self._logger.info("Found error \"Undefined control sequence\"")
+        self._logger.info(f"Possible mistake with {lines[i+1]} ..")
+    
     def _hint(self, msg):
         """TODO add more hints for errors"""
+        lines = msg.splitlines()
         self._logger.info(f" Hints ".center(self._width, "-"))
         if "! Missing $ inserted." in msg:
-            self._logger.info("Found error \"Missing $ inserted\"")
-            self._logger.info("Possible mistakes: 1) math expression 2) charactor '_' not backslashed 3) ..")
+            self._hint_missing_dollar()
+        if "! Undefined control sequence" in msg:
+            self._hint_undefined_control_sequence(lines)
         else:
             self._logger.info("None")
 
