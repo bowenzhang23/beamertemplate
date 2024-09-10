@@ -27,7 +27,6 @@ class BeamerHeader(BeamerComponent):
 \usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{graphicx}
-\usepackage{enumitem}
 """
         return header_tex
 
