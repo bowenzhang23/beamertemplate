@@ -25,7 +25,11 @@ class BeamerCompiler(object):
                 break
         self._logger.info("Found error \"Undefined control sequence\"")
         self._logger.info(f"Possible mistake with {lines[i+1]} ..")
-    
+
+    def _hint_illegal_unit_measure(self):
+        self._logger.info("Found error \"Illegal unit of measure\"")
+        self._logger.info(f"Possible mistake with \"width\" in \"includegraphics\"")
+
     def _hint(self, msg):
         """TODO add more hints for errors"""
         lines = msg.splitlines()
@@ -34,6 +38,8 @@ class BeamerCompiler(object):
             self._hint_missing_dollar()
         if "! Undefined control sequence" in msg:
             self._hint_undefined_control_sequence(lines)
+        if "! Illegal unit of measure" in msg:
+            self._hint_illegal_unit_measure()
         else:
             self._logger.info("None")
 
