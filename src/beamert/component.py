@@ -27,6 +27,7 @@ class BeamerHeader(BeamerComponent):
 \usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{amsmath, amsthm, amssymb}
 """
         return header_tex
 
