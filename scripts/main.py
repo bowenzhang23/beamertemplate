@@ -10,17 +10,15 @@ import templates
 
 
 def main(args):
-    m = None
-    for mo in pkgutil.iter_modules(["scripts/templates"]):
-        if mo.name == args.module:
-            m = importlib.import_module(f"templates.{mo.name}")
-    if m:
+    try:
+        m = importlib.import_module(f"templates.{args.module}")
         compiler = BeamerCompiler(
             getattr(m, "components"), verbose=args.verbose, force=args.force
         )
         compiler.compile(args.output)
-    else:
+    except ModuleNotFoundError:
         print(f"No module named \"{args.module}\", exit..")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

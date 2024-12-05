@@ -32,6 +32,19 @@ class BeamerHeader(BeamerComponent):
         return header_tex
 
 
+class BeamerCustomHeader(BeamerComponent):
+    def __init__(self, settings):
+        super().__init__()
+        self._settings = settings
+
+    def parse(self):
+        header_tex = rf"""
+% custom settings
+{self._settings}
+"""
+        return header_tex
+
+
 class BeamerStyle(BeamerComponent):
     def __init__(self):
         super().__init__()
