@@ -78,7 +78,7 @@ class BeamerStyle(BeamerComponent):
 \setlength{\leftmargini}{0.3cm}
 \setlength{\leftmarginii}{0.3cm}
 
-\renewcommand{\bluehref}[2]{\href{#1}{\textcolor{myblue}{#2}}}
+\providecommand{\bluehref}[2]{\href{#1}{\textcolor{myblue}{#2}}}
 """
         return style_tex
 
